@@ -1,0 +1,315 @@
+Sp Etapa
+--------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertEtapa`(IN paraNomEtapa VARCHAR(50), IN paraDuracion VARCHAR(50), IN paraDescripcion VARCHAR(50), IN paraIdRuta INT)
+
+BEGIN
+
+INSERT INTO Etapa(NomEtapa, Duracion, Descripcion, IdRuta)
+
+ VALUES
+(paraNomEtapa, paraDuracion, paraDescripcion, paraIdRuta);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateEtapa`(IN paraIdEtapa INT,IN paraNomEtapa VARCHAR(50), IN paraDuracion VARCHAR(50), IN paraDescripcion VARCHAR(50), IN paraIdRuta INT)
+
+BEGIN
+
+UPDATE Etapa SET NomEtapa=paraNomEtapa, Duracion=paraDuracion, Descripcion=paraDescripcion, IdRuta=paraIdRuta
+    
+WHERE IdEtapa=paraIdEtapa;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteEtapa`(IN paraIdEtapa INT)
+
+BEGIN
+
+DELETE FROM Etapa  
+WHERE IdEtapa=paraIdEtapa;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectEtapaAll`()
+
+BEGIN
+
+	
+SELECT * FROM Etapa;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectEtapaById`(IN paraIdEtapa INT)
+
+BEGIN
+
+SELECT * FROM Etapa 
+WHERE IdEtapa=paraIdEtapa;
+
+END
+---------------------
+Sp Ruta
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_RutaInsert`(IN Nombreru VARCHAR (100), IN Tiporu VARCHAR (100),IN Duracionru Time)
+
+BEGIN
+
+INSERT INTO Ruta
+(Nombre,Tipo,Duracion)
+
+values
+(Nombreru, Tiporu, Duracionru);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_RutaUpdate`(IN IdRutar INT, IN Nombreru VARCHAR (100), IN Tiporu VARCHAR (100),IN Duracionru Time)
+
+BEGIN
+
+UPDATE Ruta
+
+SET IdRuta=IdRutar,Nombre=Nombreru, Tipo=Tiporu,Duracion=Duracionru
+
+WHERE IdRuta=IdRutar;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_RutaDelete`(IN IdRutar INT)
+
+BEGIN
+
+DELETE FROM Ruta
+
+WHERE IdRuta=IdRutar;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_RutaSelectAll`()
+
+BEGIN
+SELECT * FROM Ruta;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_RutaSelectById`(IN IdRutar INT)
+
+BEGIN
+
+SELECT * FROM Ruta
+WHERE IdRuta=IdRutar;
+
+END
+---------------------
+Sp Promocion
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertPromocion`(IN paraPromocionQR VARCHAR(767), IN paraDescripcion VARCHAR(255), 
+IN paraEstatus BIT, IN paraDescuento VARCHAR(50), IN paraIdEtapa INT)
+
+BEGIN
+
+INSERT INTO Promocion 
+    
+(PromocionQR, Descripcion, Estatus, Descuento, IdEtapa)
+   
+ VALUES 
+    
+(paraPromocionQR, paraDescripcion, paraEstatus, paraDescuento, paraIdEtapa);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdatePromocion`(IN paraPromocionQR VARCHAR(767), IN paraDescripcion VARCHAR(255), 
+IN paraEstatus BIT, IN paraDescuento VARCHAR(50), IN paraIdEtapa INT)
+
+BEGIN
+
+UPDATE Promocion SET PromocionQR=paraPromocionQR, Descripcion=paraDescripcion, Estatus=paraEstatus, Descuento=paraDescuento, IdEtapa=paraIdEtapa
+    
+WHERE PromocionQR=paraPromocionQR;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeletePromocion`(IN paraPromocionQR VARCHAR(767))
+
+BEGIN
+
+	
+DELETE FROM Promocion 
+WHERE PromocionQR=paraPromocionQR;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectPromocionAll`()
+
+BEGIN
+
+SELECT * FROM Promocion;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectPromocionById`(IN paraPromocionQR VARCHAR(767))
+
+BEGIN
+
+SELECT * FROM Promocion 
+WHERE PromocionQR=paraPromocionQR;
+
+END
+--------------------
+Sp Reservacion
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_ReservInsert`(IN NombreUsuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,IN Costore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
+
+BEGIN
+
+INSERT INTO Reservacion
+(NombreUsuario, IdRuta, Fecha, Costo, Pago, Descuento)
+Values
+(NombreUsuariore, IdRutare, Fechare, Costore, Pagore, Descuentore);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservUpdate`(IN IdReservacionr INT,IN NombreUsuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,INCostore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
+
+BEGIN
+
+UPDATE Reservacion
+
+SET NombreUsuario=NombreUsuariore, IdRuta=IdRutare, Fecha=Fechare, Costo=Costore, Pago=Pagore, Descuento=Descuentore
+WHERE IdReservacion=IdReservacionr;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservDelete`(IN IdReservacionr INT)
+
+BEGIN
+
+DELETE FROM Reservacion
+
+WHERE IdReservacion=IdReservacionr;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservSelectAll`()
+
+BEGIN 
+
+SELECT * FROM Reservacion;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservSelectById`(IN IdReservacionr INT)
+
+BEGIN 
+
+SELECT * FROM Reservacion
+
+WHERE IdReservacion=IdReservacionr;
+
+END
+--------------------
+Sp Usuario
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioInsert`(NombreUsuarioUs VARCHAR (50), IN ContrasenaUs VARCHAR (30),IN ApPaternoUs VARCHAR (50),IN ApMaternoUs VARCHAR (50),IN IdEstadoUs INT ,IN IdPais INT,IN CorreoUs VARCHAR (100),IN TelefonoUs VARCHAR (15))
+
+BEGIN
+
+INSERT INTO Usuario
+(NombreUsuario, Contrasena,ApPaterno,ApMaterno,Estado,Pais,Correo ,Telefono)
+
+VALUES
+(NombreUsuarioUs, ContrasenaUs,ApPaternoUs,ApMaternoUs,IdEstadoUs,IdPaisUs,CorreoUs,TelefonoUs);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioUpdate`(in NombreUsuarioUs VARCHAR (50), IN ContrasenaUs VARCHAR (30),IN ApPaternoUs VARCHAR (50),IN ApMaternoUs VARCHAR (50),IN IdEstadoUs VARCHAR (50),IN IdPaisUs VARCHAR (100),IN CorreoUs VARCHAR (100),IN TelefonoUs VARCHAR (15))
+BEGIN
+
+UPDATE Usuario
+
+SET NombreUsuario=NombreUsuarioUs, Contrasena=ContrasenaUs,ApPaterno=ApPaternoUs,ApMaterno=ApMaternoUs,IdEstado=EstadoUs,IdPais=IdPaisUs,Correo=CorreoUs ,Telefono=TelefonoUs
+
+WHERE NombreUsuario=NombreUsuarioUs;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioDelete`(IN NombreUsuarioUs VARCHAR (50))
+
+BEGIN
+
+DELETE FROM Usuario
+
+WHERE NombreUsuario=NombreUsuarioUs;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioSelectAll`()
+
+BEGIN
+
+SELECT * FROM Usuario;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioSelectById`(IN NombreUsuarioUs VARCHAR (50))
+
+BEGIN
+
+SELECT * FROM Usuario
+
+WHERE NombreUsuario=NombreUsuarioUs;
+END
+--------------------
+Sp UsuarioPromocion
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProInsert`(IN NomUsuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
+
+BEGIN
+
+INSERT INTO UsuarioPromocion
+(NombreUsuario, PromocionQR,Descripcion,Descuento,Estatus)
+
+VALUES
+
+(NombreUsuarioup, PromocionQRup,Descripcionup,Descuentoup,Estatusup);
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProUpdate`(IN IdUsProm INT,IN NomUsuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
+
+BEGIN
+
+UPDATE UsuarioPromocion 
+
+SET NombreUsuario=NomUsuarioup ,PromocionQR=PromocionQRup, Descripcion=Descripcionup, Descuento=Descuentoup,Estatus=Estatusup
+
+WHERE IdUsuarioPromocion=IdUsProm;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProDelete`(IN IdUsProm INT)
+
+BEGIN
+
+DELETE FROM UsuarioPromocion 
+
+WHERE IdUsuarioPromocion=IdUsProm;
+
+END
+----
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProSelectAll`()
+
+BEGIN
+
+SELECT * FROM UsuarioPromocion;
+
+END
+---
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProSelectById`(IN IdUsProm INT)
+
+BEGIN
+
+SELECT * FROM UsuarioPromocion
+
+WHERE IdUsuarioPromocion=IdUsProm;
+
+END

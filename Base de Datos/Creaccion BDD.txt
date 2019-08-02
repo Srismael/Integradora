@@ -1,0 +1,70 @@
+CREATE DATABASE bd_Integradora;
+Use bd_Integradora;
+
+CREATE TABLE Pais (
+IdPais INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR (35))
+
+CREATE TABLE Estado (
+IdEstado INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR (35)
+IdPais INT,
+FOREIGN KEY fk_estmun (IdPais) REFERENCES Pais (IdPais) ON UPDATE CASCADE ON DELETE RESTRICT)
+
+CREATE TABLE Usuario (
+NombreUsuario VARCHAR (50) PRIMARY KEY NOT NULL,
+Contrasena VARCHAR (30),
+ApPaterno VARCHAR (50),
+ApMaterno VARCHAR (50),
+IdEstado int,
+FOREIGN KEY fk_usuario_pais (IdPais) References Pais (IdPais) ON UPDATE CASCADE ON DELETE RESTRICT,
+IdPais int,
+FOREIGN KEY fk_usuario_mun (IdMunicipio) References Municipio (IdMunicipio) ON UPDATE CASCADE ON DELETE RESTRICT,
+Correo VARCHAR (100),
+Telefono VARCHAR (15)
+);
++CREATE TABLE Ruta( 
+IdRuta INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR (100),
+Tipo VARCHAR (100),
+Duracion TIME
+);
++CREATE TABLE Etapa(
+IdEtapa INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR (100),
+Descripcion VARCHAR (300),
+Duracion TIME,
+IdRuta INT,
+FOREIGN KEY fk_etapa_ruta (IdRuta) REFERENCES Ruta (IdRuta) ON UPDATE CASCADE ON DELETE RESTRICT
+);
++CREATE TABLE Reservacion(
+IdReservacion INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NombreUsuario VARCHAR (50),
+FOREIGN KEY fk_res_usuario (NombreUsuario) REFERENCES Usuario (NombreUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+IdRuta INT,
+FOREIGN KEY fk_res_ruta (IdRuta) REFERENCES Ruta (IdRuta) ON UPDATE CASCADE ON DELETE RESTRICT,
+Fecha DATE,
+Costo DOUBLE,
+Pago BIT,
+Descuento VARCHAR (50)
+);
+
++CREATE TABLE Promocion (
+PromocionQR varchar (767) primary key not null, 
+Descripcion VARCHAR (300),
+Estatus BIT,
+Descuento VARCHAR (50),
+IdEtapa INT,
+FOREIGN KEY fk_pro_etapa (IdEtapa) REFERENCES Etapa (IdEtapa) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE UsuarioPromocion(
+IdUsuarioPromocion  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NombreUsuario VARCHAR (50),
+FOREIGN KEY fk_usuario_up (NombreUsuario) REFERENCES Usuario (NombreUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+PromocionQR VARCHAR (767),
+FOREIGN KEY fk_codqr_up (PromocionQR) REFERENCES Promocion (PromocionQR) ON UPDATE CASCADE ON DELETE RESTRICT,
+Descripcion VARCHAR (300),
+Descuento VARCHAR (50),
+Estatus BIT
+);
