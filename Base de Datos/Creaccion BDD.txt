@@ -12,15 +12,14 @@ IdPais INT,
 FOREIGN KEY fk_estmun (IdPais) REFERENCES Pais (IdPais) ON UPDATE CASCADE ON DELETE RESTRICT)
 
 CREATE TABLE Usuario (
-NombreUsuario VARCHAR (50) PRIMARY KEY NOT NULL,
-Contrasena VARCHAR (30),
-ApPaterno VARCHAR (50),
-ApMaterno VARCHAR (50),
+Usuario VARCHAR (50) PRIMARY KEY NOT NULL,
+Passwd VARCHAR (30),
+Apellido VARCHAR (50),
 IdEstado int,
 FOREIGN KEY fk_usuario_pais (IdPais) References Pais (IdPais) ON UPDATE CASCADE ON DELETE RESTRICT,
 IdPais int,
 FOREIGN KEY fk_usuario_mun (IdMunicipio) References Municipio (IdMunicipio) ON UPDATE CASCADE ON DELETE RESTRICT,
-Correo VARCHAR (100),
+Direccion VARCHAR (100),
 Telefono VARCHAR (15)
 );
 +CREATE TABLE Ruta( 
@@ -39,7 +38,7 @@ FOREIGN KEY fk_etapa_ruta (IdRuta) REFERENCES Ruta (IdRuta) ON UPDATE CASCADE ON
 );
 +CREATE TABLE Reservacion(
 IdReservacion INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-NombreUsuario VARCHAR (50),
+Usuario VARCHAR (50),
 FOREIGN KEY fk_res_usuario (NombreUsuario) REFERENCES Usuario (NombreUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
 IdRuta INT,
 FOREIGN KEY fk_res_ruta (IdRuta) REFERENCES Ruta (IdRuta) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -60,7 +59,7 @@ FOREIGN KEY fk_pro_etapa (IdEtapa) REFERENCES Etapa (IdEtapa) ON UPDATE CASCADE 
 
 CREATE TABLE UsuarioPromocion(
 IdUsuarioPromocion  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-NombreUsuario VARCHAR (50),
+Usuario VARCHAR (50),
 FOREIGN KEY fk_usuario_up (NombreUsuario) REFERENCES Usuario (NombreUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
 PromocionQR VARCHAR (767),
 FOREIGN KEY fk_codqr_up (PromocionQR) REFERENCES Promocion (PromocionQR) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -68,3 +67,14 @@ Descripcion VARCHAR (300),
 Descuento VARCHAR (50),
 Estatus BIT
 );
+CREATE TABLE Bitacora(
+IdBitacora INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NombreTabla VARCHAR (100),
+NombreCampo VARCHAR (100),
+Fecha DATETIME,
+Usuario VARCHAR(50),
+ValorAnterior VARCHAR(255),
+ValorNuevo VARCHAR(255),
+Accion VARCHAR(20),
+IdCampo INT
+)

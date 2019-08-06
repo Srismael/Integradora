@@ -157,24 +157,24 @@ END
 --------------------
 Sp Reservacion
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_ReservInsert`(IN NombreUsuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,IN Costore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_ReservInsert`(IN Usuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,IN Costore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
 
 BEGIN
 
 INSERT INTO Reservacion
-(NombreUsuario, IdRuta, Fecha, Costo, Pago, Descuento)
+(Usuario, IdRuta, Fecha, Costo, Pago, Descuento)
 Values
-(NombreUsuariore, IdRutare, Fechare, Costore, Pagore, Descuentore);
+(Usuariore, IdRutare, Fechare, Costore, Pagore, Descuentore);
 
 END
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservUpdate`(IN IdReservacionr INT,IN NombreUsuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,INCostore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_reservUpdate`(IN IdReservacionr INT,IN Usuariore VARCHAR (50),InIdRutare INT,IN Fechare DATE,INCostore DOUBLE,IN Pagore BIT,IN Descuentore VARCHAR (50))
 
 BEGIN
 
 UPDATE Reservacion
 
-SET NombreUsuario=NombreUsuariore, IdRuta=IdRutare, Fecha=Fechare, Costo=Costore, Pago=Pagore, Descuento=Descuentore
+SET Usuario=Usuariore, IdRuta=IdRutare, Fecha=Fechare, Costo=Costore, Pago=Pagore, Descuento=Descuentore
 WHERE IdReservacion=IdReservacionr;
 
 END
@@ -209,24 +209,24 @@ END
 --------------------
 Sp Usuario
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioInsert`(NombreUsuarioUs VARCHAR (50), IN ContrasenaUs VARCHAR (30),IN ApPaternoUs VARCHAR (50),IN ApMaternoUs VARCHAR (50),IN IdEstadoUs INT ,IN IdPais INT,IN CorreoUs VARCHAR (100),IN TelefonoUs VARCHAR (15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioInsert`(UsuarioUs VARCHAR (50), IN PasswdUs VARCHAR (30),IN Apellido VARCHAR (50),IN IdEstadoUs INT ,IN IdPais INT,IN Direccion VARCHAR (100),IN TelefonoUs VARCHAR (15))
 
 BEGIN
 
 INSERT INTO Usuario
-(NombreUsuario, Contrasena,ApPaterno,ApMaterno,Estado,Pais,Correo ,Telefono)
+(Usuario, Passwd,Apellido,Estado,Pais,Direccion ,Telefono)
 
 VALUES
-(NombreUsuarioUs, ContrasenaUs,ApPaternoUs,ApMaternoUs,IdEstadoUs,IdPaisUs,CorreoUs,TelefonoUs);
+(UsuarioUs, PasswdUs,ApellidoUs,IdEstadoUs,IdPaisUs,DireccionUs,TelefonoUs);
 
 END
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioUpdate`(in NombreUsuarioUs VARCHAR (50), IN ContrasenaUs VARCHAR (30),IN ApPaternoUs VARCHAR (50),IN ApMaternoUs VARCHAR (50),IN IdEstadoUs VARCHAR (50),IN IdPaisUs VARCHAR (100),IN CorreoUs VARCHAR (100),IN TelefonoUs VARCHAR (15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioUpdate`(in UsuarioUs VARCHAR (50), IN PasswdUs VARCHAR (30),IN Apellido VARCHAR (50),IN IdEstadoUs VARCHAR (50),IN IdPaisUs VARCHAR (100),IN DireccionUs VARCHAR (100),IN TelefonoUs VARCHAR (15))
 BEGIN
 
 UPDATE Usuario
 
-SET NombreUsuario=NombreUsuarioUs, Contrasena=ContrasenaUs,ApPaterno=ApPaternoUs,ApMaterno=ApMaternoUs,IdEstado=EstadoUs,IdPais=IdPaisUs,Correo=CorreoUs ,Telefono=TelefonoUs
+SET NombreUsuario=NombreUsuarioUs, Passwd=PasswdUs,ApPaterno=ApPaternoUs,ApMaterno=ApMaternoUs,IdEstado=EstadoUs,IdPais=IdPaisUs,Direccion=DireccionUs ,Telefono=TelefonoUs
 
 WHERE NombreUsuario=NombreUsuarioUs;
 
@@ -250,7 +250,7 @@ SELECT * FROM Usuario;
 
 END
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioSelectById`(IN NombreUsuarioUs VARCHAR (50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsuarioSelectById`(IN UsuarioUs VARCHAR (50))
 
 BEGIN
 
@@ -261,26 +261,26 @@ END
 --------------------
 Sp UsuarioPromocion
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProInsert`(IN NomUsuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProInsert`(IN Usuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
 
 BEGIN
 
 INSERT INTO UsuarioPromocion
-(NombreUsuario, PromocionQR,Descripcion,Descuento,Estatus)
+(Usuario, PromocionQR,Descripcion,Descuento,Estatus)
 
 VALUES
 
-(NombreUsuarioup, PromocionQRup,Descripcionup,Descuentoup,Estatusup);
+(Usuarioup, PromocionQRup,Descripcionup,Descuentoup,Estatusup);
 
 END
 ---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProUpdate`(IN IdUsProm INT,IN NomUsuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Sp_UsProUpdate`(IN IdUsProm INT,IN Usuarioup VARCHAR (50),IN PromocionQRup VARCHAR (767),IN Descripcionup VARCHAR (300),IN Descuentoup VARCHAR (50),IN Estatusup BIT)
 
 BEGIN
 
 UPDATE UsuarioPromocion 
 
-SET NombreUsuario=NomUsuarioup ,PromocionQR=PromocionQRup, Descripcion=Descripcionup, Descuento=Descuentoup,Estatus=Estatusup
+SET Usuario=Usuarioup ,PromocionQR=PromocionQRup, Descripcion=Descripcionup, Descuento=Descuentoup,Estatus=Estatusup
 
 WHERE IdUsuarioPromocion=IdUsProm;
 
